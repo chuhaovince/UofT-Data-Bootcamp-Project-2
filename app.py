@@ -1,7 +1,7 @@
 # import necessary libraries
 import os
 from flask import (Flask, render_template, jsonify, request, redirect)
-
+from flask_pymongo import PyMongo
 #################################################
 # Flask Setup
 #################################################
@@ -11,12 +11,10 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-from flask_sqlalchemy import SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
-db = SQLAlchemy(app)
+# Use flask_pymongo to set up mongo connection
+app.config["MONGO_URI"] = "mongodb+srv://chuhaovince:<password>@startmeup-k8pb0.mongodb.net/test?retryWrites=true&w=majority"
+mongo = PyMongo(app)
 
-from models import Station
 
 
 # create route that renders index.html template
