@@ -27,12 +27,20 @@ def home():
 
 
 # Query the database and send the jsonified results
-@app.route("/send", methods=["GET", "POST"])
+@app.route("/add", methods=["GET", "POST"])
 def send():
     if request.method == "POST":
-        name = request.form["petName"]
-        lat = request.form["petLat"]
-        lon = request.form["petLon"]
+        mongo.db.
+        operatorInfoTitle = request.form["operatortitle"]
+        operatorID = request.form["operatorid"]
+        usagecost = request.form["usagecost"]
+        addressTitle = request.form["addresstitle"]
+        address = request.form["address"]
+        town = request.form["town"]
+        state = request.form["state"]
+        country = request.form["country"]
+        lat = request.form["Lat"]
+        lon = request.form["Lon"]
 
         pet = Pet(name=name, lat=lat, lon=lon)
         db.session.add(pet)
@@ -42,9 +50,9 @@ def send():
     return render_template("form.html")
 
 
-@app.route("/api/pals")
+@app.route("/api/location")
 def pals():
-    results = db.session.query(Pet.name, Pet.lat, Pet.lon).all()
+    results = mongo.session.query(Pet.name, Pet.lat, Pet.lon).all()
 
     hover_text = [result[0] for result in results]
     lat = [result[1] for result in results]
