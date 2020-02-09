@@ -11,7 +11,7 @@ __author__ = 'mLab'
 mongoURI = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
 
 # Store the API url
-opendataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=500&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario%20charging%20stations&key=opendatapi";
+opendataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=500&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario%20charging%20stations&key=opendatapi"
 
 # Get resutls in json format
 response = requests.get(opendataURL).json()
@@ -26,6 +26,9 @@ def main(args):
 
     # Create new collections under the default database
     opendataCollection = db["OpenData"]
+
+    # Create new collections to save user inputs
+    userCollection = db['InputData']
 
     # Clean up the database before updating new data
     opendataCollection.delete_many({})
