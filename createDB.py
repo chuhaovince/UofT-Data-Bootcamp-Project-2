@@ -1,26 +1,48 @@
 import pymongo
 import requests
+from config import opendatapi
+import sys
+
+# Distributed under the MIT license - http://opensource.org/licenses/MIT
+
+__author__ = 'mLab'
+
+# Set the mongodb URL
+mongoURI = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
 
 # connect to mongodb server
-
-client = pymongo.MongoClient("mongodb+srv://chuhaovince:biqu92cala@startmeup-k8pb0.mongodb.net/test?retryWrites=true&w=majority")
+#client = pymongo.MongoClient("mongodb+srv://chuhaovince:biqu92cala@startmeup-k8pb0.mongodb.net/test?retryWrites=true&w=majority")
 
 # Create database call ChargingStations
-db = client.ChargingStations
+#db = client.ChargingStations
 
 # Create our table/collections
-myCollection = db.charging_stations
+#myCollection = db.charging_stations
 
 # Store the API url
-dataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=500&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario%20charging%20stations&key=f6e470b3-c2f2-4c69-a477-3dbac08fea4b";
+opendataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=500&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario%20charging%20stations&key=opendatapi";
 
-# Get resutls in json format
-response = requests.get(dataURL).json()
+    # Get resutls in json format
+response = requests.get(opendataURL).json()
 
+def main(args):
+
+    # Connect to mongodb server
+    client = pymongo.MongoClient(mongoURI)
+
+    # Get the default database heroku give us
+    db = client.get_default_database()
+
+    # Create new collections under the default database
+    opendataCollection = db["OpenData"]
+
+    # Insert data into the opendataCollection/ build the table
+    opendataCollection.insert_many(response)
 # Clean up the database before updating new data
-myCollection.delete_many({})
+#myCollection.delete_many({})
 
 # Updating new dataset
-station_data = myCollection.insert_many(response)
+#station_data = myCollection.insert_many(response)
 
-
+if __name__ == '__main__':
+    main(sys.argv[1:])
