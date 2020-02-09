@@ -22,7 +22,7 @@ mongoURI = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.c
 # Store the API url
 opendataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=500&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario%20charging%20stations&key=opendatapi";
 
-    # Get resutls in json format
+# Get resutls in json format
 response = requests.get(opendataURL).json()
 
 def main(args):
@@ -36,13 +36,17 @@ def main(args):
     # Create new collections under the default database
     opendataCollection = db["OpenData"]
 
-    # Insert data into the opendataCollection/ build the table
-    opendataCollection.insert_many(response)
-# Clean up the database before updating new data
-#myCollection.delete_many({})
+    # Clean up the database before updating new data
+    opendataCollection.delete_many({})
 
-# Updating new dataset
-#station_data = myCollection.insert_many(response)
+    # Insert new data into the opendataCollection/ build the table
+    opendataCollection.insert_many(response)
+
+    print(opendataCollection.find().count())
+
+    # Clocse the connection
+    client.close()
+
 
 if __name__ == '__main__':
     main(sys.argv[1:])
