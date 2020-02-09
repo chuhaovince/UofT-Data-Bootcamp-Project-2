@@ -10,15 +10,6 @@ __author__ = 'mLab'
 # Set the mongodb URL
 mongoURI = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
 
-# connect to mongodb server
-#client = pymongo.MongoClient("mongodb+srv://chuhaovince:biqu92cala@startmeup-k8pb0.mongodb.net/test?retryWrites=true&w=majority")
-
-# Create database call ChargingStations
-#db = client.ChargingStations
-
-# Create our table/collections
-#myCollection = db.charging_stations
-
 # Store the API url
 opendataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=500&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario%20charging%20stations&key=opendatapi";
 
@@ -41,8 +32,6 @@ def main(args):
 
     # Insert new data into the opendataCollection/ build the table
     opendataCollection.insert_many(response)
-
-    print(opendataCollection.find().count())
 
     # Clocse the connection
     client.close()
