@@ -27,9 +27,6 @@ def main(args):
     # Create new collections under the default database
     opendataCollection = db["OpenData"]
 
-    # Create new collections to save user inputs
-    userCollection = db['InputData']
-
     # Clean up the database before updating new data
     opendataCollection.delete_many({})
 
