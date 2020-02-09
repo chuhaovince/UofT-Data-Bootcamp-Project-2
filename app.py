@@ -1,6 +1,6 @@
 # import necessary libraries
-import os
-from flask import (Flask, render_template, jsonify, request, redirect)
+import os, sys
+from flask import Flask, render_template, jsonify, request, redirect
 from flask_pymongo import PyMongo
 #################################################
 # Flask Setup
@@ -11,8 +11,11 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
+# Distributed under the MIT license - http://opensource.org/licenses/MIT
+__author__ = 'mLab'
+
 # Use flask_pymongo to set up mongo connection
-app.config["MONGO_URI"] = "mongodb+srv://chuhaovince:<password>@startmeup-k8pb0.mongodb.net/test?retryWrites=true&w=majority"
+app.config["MONGO_URI"] = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
 mongo = PyMongo(app)
 
 
