@@ -1,84 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-
+​
 <head>
-  <meta charset="UTF-8">
-  <title>CSS Review</title>
-  <link rel="stylesheet" href="reset.css">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <title>Latittude Visualization Dashboard </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="index_page.css">
 </head>
-
+​
 <body>
-
-
-
-  <div class="container">
-    <nav class="navbar">
-      <ul>
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li>
-          <a href="#">About</a>
-        </li>
-      </ul>
-
-    <div class="row">
-
-    <div class="col-md-3">
-        <select id="powerlevels">
-            <option value="Level_1">Level 1</option>
-            <option value="Level_2">Level 2</option>
-            <option value="Level_3">Level 3</option>
-        </select>
-
-        <select id="connectiontypes">
-            <option value="plug1">plug 1</option>
-            <option value="plug2">plug 2</option>
-            <option value="plug3">plug 3</option>
-        </select>
-    </div>
-    </div>
-
-      <select id="nav-select">
-        <option value="home">Home</option>
-        <option value="about">About</option>
-      </select>
-      <div class="clearfix"></div>
+    <nav class="navbar navbar-expand-lg"> <!--navigation bar-->
+    <a class="navbar-brand" href="index.html">Lattitude</a>
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active dropdown">
+                    <!--create dropdown button-->
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="flase">Plots</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="Resources/assets/images/Fig1.png" target = "_blank">Max Temperature</a>
+                        <a class="dropdown-item" href="Resources/assets/images/Fig2.png" target = "_blank">Humidity</a>
+                        <a class="dropdown-item" href="Resources/assets/images/Fig3.png" target = "_blank">Cloudiness</a>
+                        <a class="dropdown-item" href="Resources/assets/images/Fig4.png" target = "_blank">Wind Speed</a>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="
+                    
+                    comparison.html">Comparison</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="data.html">Data</a>
+                </li>
+            </ul>
+        </div>
     </nav>
-    <header class="header">
-      <h1>WELCOME TO SEARCH ANY CAR ELECTRIC STATION </h1>
-      <img src="assets/electric_car.jpg"
-      style="width:300px;height:221px";hspace="100">
-      <img src="assets/plug_types.png"
-      style="width:300px;height:221px;">
-      <img src="assets/truck.jpg"
-      style="width:300px;height:221px;">
-    </header>
-    <main>
-      <section class="posts">
-        <article class="post">
-          <h3>What is Electric Vehicle</h3>
-          <p>An electric vehicle, also called an EV, uses one or more electric motors or traction motors for propulsion. An electric vehicle may be powered through a collector system by electricity from off-vehicle sources, or may be self-contained with a battery, solar panels or an electric generator to convert fuel to electricity. EVs include, but are not limited to, road and rail vehicles, surface and underwater vessels, electric aircraft and electric spacecraft.
-          </p>
-          <p>
-            EVs first came into existence in the mid-19th century, when electricity was among the preferred methods for motor vehicle propulsion, providing a level of comfort and ease of operation that could not be achieved by the gasoline cars of the time. Modern internal combustion engines have been the dominant propulsion method for motor vehicles for almost 100 years, but electric power has remained commonplace in other vehicle types, such as trains and smaller vehicles of all types.
-          </p>
-        </article>
-        <article class="post">
-          <h3>History of Electric Vehicle</h3>
-          <p>Electric motive power started in 1827, when Hungarian priest Ányos Jedlik built the first crude but viable electric motor, provided with stator, rotor and commutator, and the year after he used it to power a tiny car.
-               A few years later, in 1835, professor Sibrandus Stratingh of the University of Groningen, the Netherlands, built a small-scale electric car, and between 1832 and 1839 (the exact year is uncertain), Robert Anderson of Scotland invented the first crude electric carriage, powered by non-rechargeable primary cells.
-               Around the same period, early experimental electrical cars were moving on rails, too. American blacksmith and inventor Thomas Davenport built a toy electric locomotive, powered by a primitive electric motor, in 1835. In 1838, a Scotsman named Robert Davidson built an electric locomotive that attained a speed of four miles per hour (6 km/h). In England a patent was granted in 1840 for the use of rails as conductors of electric current, and similar American patents were issued to Lilley and Colten in 1847.
-          </p>
-        </article>
-        
-      </section>
-    </main>
-  </div>
-
+​
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <h1 class = "header-1">
+                    Summary: Lattitude vs. X
+                </h1>
+                <hr class="my-4">
+                <div class="img"><img class = "right-fit" src = "Resources/assets/images/Fig1.png" ALIGN = "left" alt = "Plot example"></div>
+                <div class="text">
+                    <p>
+                            Prime Minister Justin Trudeau's recent candid comments about U.S. President Donald Trump received the Saturday Night Live treatment, with some big-name comedians dropping in to portray Trudeau and other world leaders as cool kids teasing a clueless Trump.
+​
+Jimmy Fallon as Trudeau, Paul Rudd as French President Emmanuel Macron, and James Corden as British Prime Minister Boris Johnson won't let Trump sit at their table in the skit and put a sign on his back saying, "Impeach me!!!"
+he Buckingham Palace reception on Tuesday, Canadian Prime Minister Justin Trudeau was seen standing in a huddle with French President Emmanuel Macron, British Prime Minister Boris Johnson, Dutch Prime Minister Mark Rutte and Princess Anne apparently gossiping about U.S. President Donald Trump’s behaviour. (Yui Mok/Pool/The Associated Press)
+hfa;shffd  dlfjsd lsdjfdj sldjfa ljdljfl j lsdj fldjf jdldjfl jdksjl jdkj dj kdfjsljffh ldjf dl jsdlkf
+                    </p>
+                    <p>
+                    "Those are my best friends," the Trump character says. "We run this place."
+​
+Report Typo or Error|Send Feedback
+RELATED STORIES
+Trudeau-Trump spat cast a shadow over a summit that got things done, say leaders
+Biden campaign uses video of Trudeau laughing at Trump in election ad
+safd sdfldj ldjsjf dslkfjla;djf sdlf
+                        </p>
+                </div>
+                
+            </div>
+            <div class = "col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <h2 class = "header-2">
+                    Visualizations
+                </h2>
+                <hr class="my-4">
+                <div class = "images">
+                    <ul>
+                        <li><a href="maxtemp.html"> <img class = "fit" src = "Resources/assets/images/Fig1.png" alt = "Lattitude vs. Max Temp"></a></li>
+                        <li><a href="humidity.html"><img class = "fit" src = "Resources/assets/images/Fig2.png" alt = "Lattitude vs. Humidity"></a></li>
+                        <li><a href="cloudiness.html"><img class = "fit" src = "Resources/assets/images/Fig3.png" alt = "Lattitude vs. Cloudiness"></a></li>
+                        <li><a href="windspeed.html"><img class = "fit" src = "Resources/assets/images/Fig4.png" alt = "Lattitude vs. Wind Speed"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-
-</html>
+​
+    
+</html
