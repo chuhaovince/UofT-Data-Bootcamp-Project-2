@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Green Charging</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="../static/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+        <link rel="stylesheet" type="text/css" href="../static/css/media.css">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg"> <!--navigation bar-->
+            <a class="navbar-brand" href="index.html">GreenCharging</a>
+            <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="add.html">Add a New Location</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" onclick="getLocation()" href="search.html">Search Nearby</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="login.html">LOGIN</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class = "container">
+            <div class = "row">
+                <div class = "col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                    <h1 class = "header-1">
+                        Welcome to Electric Charging Stations
+                    </h1>
+                    
+                    <hr class="my-4">
+                    <div class = "img" style="max-width : 1500px">
+                        <img class = "center-fit" src= "../assets/img/homepage_img.jpg">
+                    </div> 
+                    <div class="text">
+                        <p>
+                            An electric vehicle, also called an EV, uses one or more electric motors or 
+                            traction motors for propulsion. An electric vehicle may be powered through a
+                            collector system by electricity from off-vehicle sources, or may be self-contained
+                            with a battery, solar panels or an electric generator to convert fuel to electricity. 
+                            EVs include, but are not limited to, road and rail vehicles, surface and underwater vessels, electric aircraft and electric spacecraft.
+                        </p>
+                        <p><strong>History:</strong>
+                            <br>
+                            Electric motive power started in 1827, when Hungarian priest Ányos Jedlik built the first crude but viable electric motor, provided with stator, rotor and commutator, and the year after he used it to power a tiny car.
+                            A few years later, in 1835, professor Sibrandus Stratingh of the University of Groningen, the Netherlands, built a small-scale electric car, and between 1832 and 1839 (the exact year is uncertain), Robert Anderson of Scotland invented the first crude electric carriage, powered by non-rechargeable primary cells.
+                            Around the same period, early experimental electrical cars were moving on rails, too. American blacksmith and inventor Thomas Davenport built a toy electric locomotive, powered by a primitive electric motor, in 1835. In 1838, a Scotsman named Robert Davidson built an electric locomotive that attained a speed of four miles per hour (6 km/h). In England a patent was granted in 1840 for the use of rails as conductors of electric current, and similar American patents were issued to Lilley and Colten in 1847.
+                        </p>
+                    </div>
+                </div>
+                <div class = "col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                    <h2 class = "header-2">
+                        Relevant infomation
+                    </h2>
+                    <hr class="my-4">
+                    <div class = "images">
+                        <ul>
+                            <li><a href="../assets/img/power_types.png" target = "_blank">Power Levels</a></li>
+                            <li><a href="../assets/img/plug_types.png" target = "_blank">Connection Types</a></li>
+                        </ul>
+                    </div>
+                    <div id= "bar"></div>
+                    <div id= "pie"></div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="static/js/bar.js"></script>
+        <script src="static/js/pie.js"></script>
+    </body>
+</html
