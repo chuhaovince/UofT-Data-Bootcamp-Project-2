@@ -1,6 +1,6 @@
 .navbar {
     padding : 1px;
-    margin-top:0;
+    margin-top: 0;
     margin-bottom:0;
     margin-left:2px;
     margin-right:2px;
@@ -40,4 +40,7 @@
   
 .nav-link {
     color : #000000;
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+    box-sizing: border-box;
 }
