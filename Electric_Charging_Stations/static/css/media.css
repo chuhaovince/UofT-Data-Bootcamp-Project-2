@@ -30,6 +30,8 @@
   
     .nav-link {
         color : #ffffff;
+        background-color: rgb(6, 156, 156);
+        box-shadow: none;
     }
   
 }
@@ -64,6 +66,8 @@
   
     .nav-link {
         color : #ffffff;
+        background-color: rgb(6, 156, 156);
+        box-shadow: none;
     }
 }
   
@@ -88,6 +92,8 @@
   
     .nav-link {
         color : #ffffff;
+        background-color: rgb(6, 156, 156);
+        box-shadow: none;
     }
 }
   

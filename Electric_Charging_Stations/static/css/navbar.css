@@ -43,4 +43,8 @@
     font-family: "Roboto", sans-serif;
     width: 100%;
     box-sizing: border-box;
+    font-weight: 900;
+    background-color: rgb(232, 233, 248);
+    border-radius: 3px;
+    box-shadow: 3px 3px 5px grey;
 }
