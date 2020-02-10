@@ -1,24 +1,38 @@
 # import necessary libraries
-import os, sys
 from flask import Flask, render_template, jsonify, request, redirect
 from flask_pymongo import PyMongo
+import requests
+from bson.json_util import dumps
 #################################################
 # Flask Setup
 #################################################
 app = Flask(__name__)
+
+# track the application-level data during a request
+app.app_context().push()
 
 #################################################
 # Database Setup
 #################################################
 
 # Distributed under the MIT license - http://opensource.org/licenses/MIT
-__author__ = 'mLab'
+# __author__ = 'mLab'
 
 # Use flask_pymongo to set up mongo connection
-app.config["MONGO_URI"] = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/charging_station"
 mongo = PyMongo(app)
 
+# Store the API url
+opendataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=500&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario%20charging%20stations&key=opendatapi"
 
+# Get resutls in json format
+response = requests.get(opendataURL).json()
+
+# Create a new collection called stations
+stationData = mongo.db.stations
+
+# Insert data into this collection(raw data)
+stationData.insert_many(response)
 
 # create route that renders index.html template
 @app.route("/")
@@ -30,52 +44,63 @@ def home():
 @app.route("/add", methods=["GET", "POST"])
 def send():
     if request.method == "POST":
-        mongo.db.
-        operatorInfoTitle = request.form["operatortitle"]
-        operatorID = request.form["operatorid"]
-        usagecost = request.form["usagecost"]
         addressTitle = request.form["addresstitle"]
         address = request.form["address"]
         town = request.form["town"]
-        state = request.form["state"]
-        country = request.form["country"]
+        province = request.form["state"]
         lat = request.form["Lat"]
-        lon = request.form["Lon"]
+        lng = request.form["Lon"]
+        connectionTitle = request.form["connextiontitle"]
+        levelID = request.form["levelid"]
 
-        pet = Pet(name=name, lat=lat, lon=lon)
-        db.session.add(pet)
-        db.session.commit()
+        new_location = {
+            "OperatorInfo" : {
+                "Title" : operatorInfoTitle,
+                "ID" : operatorID
+            },
+            "UsageCost" : usagecost,
+            "AddressInfo" : {
+                "Title" : addressTitle,
+                "AddressLine1" : address,
+                "Town" : town,
+                "StateOrProvince" : province,
+                "Country" : {
+                    "Title" : country
+                }
+            },
+            "Latitude" : lat,
+            "longitude" : lng,
+            "Connections" : [{
+                "Title" : connectionTitle,
+                "LevelID" : levelID
+            }]
+        }
+
+        # Insert the new location data into database collection called stations
+        mongo.db.stations.insert(new_location)
+
         return redirect("/", code=302)
 
     return render_template("form.html")
 
 
-@app.route("/api/location")
-def pals():
-    results = mongo.session.query(Pet.name, Pet.lat, Pet.lon).all()
+@app.route("/api/locations")
+def locations():
+    # Fetch all data from database and jsonify it
+    data = mongo.db.stations.find()
 
-    hover_text = [result[0] for result in results]
-    lat = [result[1] for result in results]
-    lon = [result[2] for result in results]
+    return jsonify(data)
 
-    pet_data = [{
-        "type": "scattergeo",
-        "locationmode": "USA-states",
-        "lat": lat,
-        "lon": lon,
-        "text": hover_text,
-        "hoverinfo": "text",
-        "marker": {
-            "size": 50,
-            "line": {
-                "color": "rgb(8,8,8)",
-                "width": 1
-            },
-        }
-    }]
+@app.route("/search")
+def search():
+    # Get the user selected level
+    connector_level = request.form.get("level_select")
 
-    return jsonify(pet_data)
+    # Filter the database with the selected level
+    data = mongo.db.stations.find({"Connections.LevelID" : connector_level})
+    jsondata = jsonify(dumps(data)) # serialization/convert to json object
 
+    return render_template("search.html"), jsondata
 
 if __name__ == "__main__":
     app.run()
