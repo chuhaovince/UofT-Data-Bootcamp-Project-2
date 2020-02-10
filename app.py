@@ -3,6 +3,7 @@ from flask import Flask, render_template, jsonify, request, redirect
 from flask_pymongo import PyMongo
 import requests
 from bson.json_util import dumps
+from bson.json_util import dumps
 #################################################
 # Flask Setup
 #################################################
@@ -25,6 +26,9 @@ mongo = PyMongo(app)
 # Store the API url
 opendataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=500&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario%20charging%20stations&key=opendatapi"
 
+# track the application-level data during a request
+app.app_context().push()
+
 # Get resutls in json format
 response = requests.get(opendataURL).json()
 
@@ -42,7 +46,7 @@ def home():
 
 # Query the database and send the jsonified results
 @app.route("/add", methods=["GET", "POST"])
-def send():
+def add():
     if request.method == "POST":
         addressTitle = request.form["addresstitle"]
         address = request.form["address"]
@@ -84,23 +88,29 @@ def send():
     return render_template("form.html")
 
 
-@app.route("/api/locations")
+@app.route("/api/allocations")
 def locations():
     # Fetch all data from database and jsonify it
     data = mongo.db.stations.find()
-
-    return jsonify(data)
+    
+    return jsonify(dumps(data))
 
 @app.route("/search")
 def search():
-    # Get the user selected level
-    connector_level = request.form.get("level_select")
 
+    return render_template("search.html")
+
+@app.route("/api/filter")
+def filterlocation():
+        # Get the user selected level
+    connector_level = request.form.get("level_select")
+    connector_type = request.form.get("type")
     # Filter the database with the selected level
-    data = mongo.db.stations.find({"Connections.LevelID" : connector_level})
+    data = mongo.db.stations.find({{"Connections.LevelID" : connector_level}, {"Connections.ConnectionType.Title" : connector_type}})
     jsondata = jsonify(dumps(data)) # serialization/convert to json object
 
-    return render_template("search.html"), jsondata
+    return jsondata
 
+    
 if __name__ == "__main__":
     app.run()
