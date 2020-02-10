@@ -54,3 +54,10 @@ body {
     position : absolute;
     right : 3%;
 }
+
+li {
+    display: block;
+    font-size: large;
+    font-family: "Impact", Charcoal, sans-serif;
+    color : black;
+}
