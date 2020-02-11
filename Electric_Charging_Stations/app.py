@@ -3,7 +3,6 @@ from flask import Flask, render_template, jsonify, request, redirect
 from flask_pymongo import PyMongo
 import requests
 from bson.json_util import dumps
-from bson.json_util import dumps
 #################################################
 # Flask Setup
 #################################################
@@ -85,15 +84,16 @@ def add():
 
         return redirect("/", code=302)
 
-    return render_template("form.html")
+    return render_template("Add.html")
 
 
 @app.route("/api/allocations")
 def locations():
     # Fetch all data from database and jsonify it
     data = mongo.db.stations.find()
-    
-    return jsonify(dumps(data))
+    data = jsonify(dumps(data))
+    #print(type(data))
+    return data
 
 @app.route("/search")
 def search():
