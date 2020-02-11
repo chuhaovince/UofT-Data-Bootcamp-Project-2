@@ -29,13 +29,13 @@ opendataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532
 app.app_context().push()
 
 # Get resutls in json format
-response = requests.get(opendataURL).json()
+#response = requests.get(opendataURL).json()
 
 # Create a new collection called stations
-stationData = mongo.db.stations
+#stationData = mongo.db.stations
 
 # Insert data into this collection(raw data)
-stationData.insert_many(response)
+#stationData.insert_many(response)
 
 # create route that renders index.html template
 @app.route("/")
@@ -90,7 +90,6 @@ def locations():
 @app.route("/api/types")
 def types():
     data = mongo.db.stations.distinct("Connections.ConnectionType.Title")
-    print(data)
     return dumps(data)
 
 @app.route("/search")
@@ -107,9 +106,11 @@ def filterlocation():
     connector_level = request.form.get("level_select")
     connector_type = request.form.get("type_select")
     # Filter the database with the selected level
-    data = mongo.db.stations.find({{"Connections.LevelID" : connector_level}, {"Connections.ConnectionType.Title" : connector_type}})
+    data = mongo.db.stations.find({"$and" :[{"Connections.LevelID" : connector_level}, {"Connections.ConnectionType.Title" : connector_type}]})
+    
+    print(f'sssss: {connector_level}')
     jsondata = dumps(data) # serialization/convert to json object
-
+    print(jsondata)
     return jsondata
 
     

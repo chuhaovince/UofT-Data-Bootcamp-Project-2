@@ -1,3 +1,4 @@
+d3.selectAll("#button").on("click", getLocation())
 // Creating map object
 var myMap = L.map("map", {
   center: [43.6532, -79.3832],
