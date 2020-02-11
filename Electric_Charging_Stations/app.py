@@ -84,7 +84,7 @@ def locations():
     # Fetch all data from database and jsonify it
     data = mongo.db.stations.find()
     data = dumps(data)
-    #print(type(data))
+    #print(data)
     return data
 
 @app.route("/api/types")

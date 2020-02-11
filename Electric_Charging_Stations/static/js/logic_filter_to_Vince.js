@@ -42,7 +42,7 @@ function CreateMap(lat, lng) {
   // Creating map object
   var myMap = L.map("map", {
     center: [lat, lng],
-    zoom: 15
+    zoom:14
   });
 
   // Adding tile layer to the map
@@ -92,7 +92,7 @@ function CreateMap(lat, lng) {
   var url = "/api/filter";
   //var url = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
   //console.log(url)
-  var markers = L.markerClusterGroup({maxClusterRadius: 30});
+ 
   // Grab the data with d3
   d3.json(url,function(response) {  
 
@@ -101,6 +101,9 @@ function CreateMap(lat, lng) {
     }
     else {
       markers.clearLayers(); // clear previous markers
+
+      var markers = L.markerClusterGroup({maxClusterRadius: 30});
+
       for (var i = 0; i < response.length; i++) {
 
         // Set the data location property to a variable
@@ -167,27 +170,28 @@ d3.json(url,function(response) {
 //var dataset = dropdownMenu.property("value");
 //console.log(dataset)
 // Loop through data 
-for (var i = 0; i < response.length; i++) {
+  for (var i = 0; i < response.length; i++) {
 
-  // Set the data location property to a variable
-  var location = response[i].AddressInfo;
-  var connections = response[i].connections;
-
-  // Check for location property
-  
-  // if (
-  // response[i].Connections.length > 0
-  // && response[i].Connections[0].ConnectionType.Title
-  // && response[i].AddressInfo
-  // && response[i].Connections[0].Level
-  // && response[i].Connections[0].Level.Title
-  // && response[i].Connections[0].Level.Title==dataset) {
-    // Add a new marker to the cluster group and bind a pop-up
-  markers.addLayer(L.marker([location.Latitude, location.Longitude])
-  .bindPopup("<h3>"+response[i].AddressInfo.Title+"</h3><hr><h2>"+response[i].AddressInfo.AddressLine1+"</h2><hr><p>"+"Connection Type: "+ connections.forEach(type=>type.ConnectionType.Title) + "</p><hr><p> Power Level: " + connections.forEach(lvl=>lvl.LevelID) + "</p>"));
-};
-// Add our marker cluster layer to the map
-myMap.addLayer(markers);
+    // Set the data location property to a variable
+    var location = response[i].AddressInfo;
+    var connections = response[i].Connections;
+    console.log(locatioin)
+    // Check for location property
+    
+    // if (
+    // response[i].Connections.length > 0
+    // && response[i].Connections[0].ConnectionType.Title
+    // && response[i].AddressInfo
+    // && response[i].Connections[0].Level
+    // && response[i].Connections[0].Level.Title
+    // && response[i].Connections[0].Level.Title==dataset) {
+      // Add a new marker to the cluster group and bind a pop-up
+    L.marker([location.Latitude, location.Longitude]).addTo(myMap);
+    // markers.addLayer(L.marker([location.Latitude, location.Longitude])
+    //   .bindPopup("<h3>"+response[i].AddressInfo.Title+"</h3><hr><h2>"+response[i].AddressInfo.AddressLine1+"</h2><hr><p>"+"Connection Type: "+ connections.forEach(type=>type.ConnectionType.Title) + "</p><hr><p> Power Level: " + connections.forEach(lvl=>lvl.LevelID) + "</p>"));
+  };
+  // Add our marker cluster layer to the map
+  myMap.addLayer(markers);
 
 });
 
