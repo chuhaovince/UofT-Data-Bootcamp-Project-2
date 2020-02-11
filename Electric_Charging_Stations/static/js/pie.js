@@ -24,15 +24,20 @@ d3.json(url).then(function(response) {
 
     var data = [{
         values: [lvl1, lvl2, lvl3],
-        labels: ['Level_1', 'Level_2', 'Level_3'],
-        type: 'pie'
+        labels: ['Level 1: Under 2KW', 'Level 2: Over 2KW', 'Level 3: Over 40KW'],
+        type: 'pie',
+        textinfo: "label+percent",
+        insidetextorientation : "raidal",
+        showlegend : false,
+        sort : false
       }];
       
       var layout = {
-        height: 400,
-        width: 500
+        title : "Percentage of Each Charging Level",
+        height: 500,
+        width : 500
       };
       
-      Plotly.newPlot(pie,data, layout); 
+      Plotly.newPlot("pie",data, layout); 
 })
 
