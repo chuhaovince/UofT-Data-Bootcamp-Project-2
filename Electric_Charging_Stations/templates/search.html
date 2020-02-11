@@ -44,12 +44,12 @@
       <div class="col-lg-2 col-md-2 col-sm-12">
         <div class="well">
           <h5>Connection Types</h5>
-          <select id="selTypes" onchange="optionChanged(this.value)"></select>
+          <select id="selTypes" onchange="optionChanged(this.value)" name = "type_select"></select>
         </div>
         <hr>
         <div class="well">
           <h5>Charging Levels</h5>
-          <select id="selLevels" onchange="optionChanged(this.value)"></select>
+          <select id="selLevels" onchange="optionChanged(this.value)" name = "level_select"></select>
         </div>
         <hr>
         <div>
@@ -64,7 +64,7 @@
     <div id="map"></div>
     <script type="text/javascript" src="../static/js/config.js"></script>
     <script type="text/javascript" src="../static/js/search.js"></script>
-    <!-- <script type="text/javascript" src="../static/js/logic_filter.js"></script> -->
+    <script type="text/javascript" src="../static/js/logic_filter_to_Vince.js"></script>
     <script src="../static/js/getlocation.js"></script>
 
   </body>

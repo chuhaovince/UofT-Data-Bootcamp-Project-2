@@ -105,7 +105,7 @@ def login():
 def filterlocation():
         # Get the user selected level
     connector_level = request.form.get("level_select")
-    connector_type = request.form.get("type")
+    connector_type = request.form.get("type_select")
     # Filter the database with the selected level
     data = mongo.db.stations.find({{"Connections.LevelID" : connector_level}, {"Connections.ConnectionType.Title" : connector_type}})
     jsondata = dumps(data) # serialization/convert to json object
