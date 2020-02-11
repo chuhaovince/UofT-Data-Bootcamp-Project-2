@@ -32,3 +32,8 @@ body {
   .map-container {
       height: 600px;
   }
+
+  hr {
+      margin-top: 30px;
+      margin-bottom: 30px;
+  }
