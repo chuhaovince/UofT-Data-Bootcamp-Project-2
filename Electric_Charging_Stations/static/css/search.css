@@ -28,3 +28,10 @@ body {
       font-weight: bolder;
       border-radius: 5px;
   }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;       /* Remove default arrow */
+    background-image: url(...);   /* Add custom arrow */
+ }

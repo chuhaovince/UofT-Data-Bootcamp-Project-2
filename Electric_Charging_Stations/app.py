@@ -91,13 +91,18 @@ def add():
 def locations():
     # Fetch all data from database and jsonify it
     data = mongo.db.stations.find()
-    data = jsonify(dumps(data))
+    data = dumps(data)
     #print(type(data))
     return data
 
+@app.route("/api/types")
+def types():
+    data = mongo.db.stations.distinct("Connections.ConnectionType.Title")
+    print(data)
+    return dumps(data)
+
 @app.route("/search")
 def search():
-
     return render_template("search.html")
 
 @app.route("/login")
@@ -111,10 +116,10 @@ def filterlocation():
     connector_type = request.form.get("type")
     # Filter the database with the selected level
     data = mongo.db.stations.find({{"Connections.LevelID" : connector_level}, {"Connections.ConnectionType.Title" : connector_type}})
-    jsondata = jsonify(dumps(data)) # serialization/convert to json object
+    jsondata = dumps(data) # serialization/convert to json object
 
     return jsondata
 
     
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

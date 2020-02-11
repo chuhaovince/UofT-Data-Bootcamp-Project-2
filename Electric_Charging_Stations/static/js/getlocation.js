@@ -8,7 +8,7 @@ function getLocation() {
 function showPosition(position) {
   var lat = position.coords.latitude;
   var lng = position.coords.longitude;
-  d3.selectAll("#map").innerHTML=lat+"<br" +lng
+  console.log(lat)
 }
 function showError(error) {
   switch(error.code) {
