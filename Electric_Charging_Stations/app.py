@@ -57,19 +57,11 @@ def add():
         levelID = request.form["levelid"]
 
         new_location = {
-            "OperatorInfo" : {
-                "Title" : operatorInfoTitle,
-                "ID" : operatorID
-            },
-            "UsageCost" : usagecost,
             "AddressInfo" : {
                 "Title" : addressTitle,
                 "AddressLine1" : address,
                 "Town" : town,
                 "StateOrProvince" : province,
-                "Country" : {
-                    "Title" : country
-                }
             },
             "Latitude" : lat,
             "longitude" : lng,
