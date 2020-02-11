@@ -1,4 +1,4 @@
-var url = ("https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=500&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario");
+var url = ("/api/allocations");
 
 d3.json(url).then(function(response) {
     var lvl1 = 0;
