@@ -3,7 +3,8 @@ from flask import Flask, render_template, jsonify, request, redirect
 from flask_pymongo import PyMongo
 import requests
 from bson.json_util import dumps
-from bson.json_util import dumps
+from selenium.webdriver.support.ui import Select
+from selenium import webdriver
 #################################################
 # Flask Setup
 #################################################
@@ -30,13 +31,13 @@ opendataURL = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532
 app.app_context().push()
 
 # Get resutls in json format
-response = requests.get(opendataURL).json()
+#response = requests.get(opendataURL).json()
 
 # Create a new collection called stations
-stationData = mongo.db.stations
+#stationData = mongo.db.stations
 
 # Insert data into this collection(raw data)
-stationData.insert_many(response)
+#stationData.insert_many(response)
 
 # create route that renders index.html template
 @app.route("/")
@@ -58,19 +59,11 @@ def add():
         levelID = request.form["levelid"]
 
         new_location = {
-            "OperatorInfo" : {
-                "Title" : operatorInfoTitle,
-                "ID" : operatorID
-            },
-            "UsageCost" : usagecost,
             "AddressInfo" : {
                 "Title" : addressTitle,
                 "AddressLine1" : address,
                 "Town" : town,
                 "StateOrProvince" : province,
-                "Country" : {
-                    "Title" : country
-                }
             },
             "Latitude" : lat,
             "longitude" : lng,
@@ -79,42 +72,48 @@ def add():
                 "LevelID" : levelID
             }]
         }
-
         # Insert the new location data into database collection called stations
         mongo.db.stations.insert(new_location)
-
         return redirect("/", code=302)
 
-    return render_template("form.html")
+    return render_template("Add.html")
 
 
 @app.route("/api/allocations")
 def locations():
     # Fetch all data from database and jsonify it
     data = mongo.db.stations.find()
-    
-    return jsonify(dumps(data))
+    data = dumps(data)
+    #print(data)
+    return data
+
+@app.route("/api/types")
+def types():
+    data = mongo.db.stations.distinct("Connections.ConnectionType.Title")
+    return dumps(data)
 
 @app.route("/search")
 def search():
-
     return render_template("search.html")
 
 @app.route("/login")
 def login():
     return render_template("login.html")
     
-@app.route("/api/filter")
-def filterlocation():
-        # Get the user selected level
-    connector_level = request.form.get("level_select")
-    connector_type = request.form.get("type")
-    # Filter the database with the selected level
-    data = mongo.db.stations.find({{"Connections.LevelID" : connector_level}, {"Connections.ConnectionType.Title" : connector_type}})
-    jsondata = jsonify(dumps(data)) # serialization/convert to json object
+# @app.route("/api/filter")
+# def filterlocation():
 
-    return jsondata
+#     # Get the user selected level
+#     # connector_level = request.form("level_select")
+#     # connector_type = request.form("type_select")
+#     # Filter the database with the selected level
+#     # data = mongo.db.stations.find({"$and" :[{"Connections.LevelID" : connector_level}, {"Connections.ConnectionType.Title" : connector_type}]})
+    
+#     print(f'sssss: {connector_level}')
+#     jsondata = dumps(data) # serialization/convert to json object
+#     print(type(jsondata))
+#     return jsondata
 
     
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
