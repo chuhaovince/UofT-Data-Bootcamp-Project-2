@@ -30,7 +30,7 @@ d3.json(url).then(function(response) {
           connectorType.splice(i, 1); 
         }
     };
-
+    console.log(connectorType)
     // Add all the types into html so it can show in the dropdown list
     for (i=0; i<connectorType.length; i++) {
         d3.select("#selTypes").append("option").attr("value",connectorType[i]).text(connectorType[i]);

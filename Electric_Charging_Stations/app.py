@@ -89,7 +89,8 @@ def locations():
 
 @app.route("/api/types")
 def types():
-    data = mongo.db.Opendata.distinct("Connections.ConnectionType.Title")
+    data = mongo.db.OpenData.distinct("Connections.ConnectionType.Title")
+    print(dumps(data))
     return dumps(data)
 
 @app.route("/search")

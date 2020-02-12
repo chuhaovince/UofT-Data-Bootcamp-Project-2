@@ -16,7 +16,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(myMap);
 
 // define a marker cluster group
-const markers = L.markerClusterGroup({maxClusterRadius: 30});
+var markers = L.markerClusterGroup({maxClusterRadius: 30});
 
 d3.json(url,function(response) {  
 
@@ -26,7 +26,7 @@ d3.json(url,function(response) {
 		var location = response[i].AddressInfo;
 		// Get the connections as an array at each location
 		//var connections = response[i].Connections;
-
+		console.log(location);
         // Check for location property
         
         // if (
