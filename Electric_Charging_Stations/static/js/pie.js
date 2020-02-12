@@ -28,14 +28,15 @@ d3.json(url).then(function(response) {
         type: 'pie',
         textinfo: "label+percent",
         insidetextorientation : "raidal",
-        showlegend : false,
         sort : false
       }];
       
       var layout = {
         title : "Percentage of Each Charging Level",
-        height: 500,
-        width : 500
+        margin :{
+            l : 120,
+            r : 95.5
+        }
       };
       
       Plotly.newPlot("pie",data, layout); 
