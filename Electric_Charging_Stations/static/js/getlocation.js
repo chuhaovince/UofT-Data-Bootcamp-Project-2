@@ -4,12 +4,13 @@ function getLocation() {
   } else {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
-}
+};
+
 function showPosition(position) {
   var lat = position.coords.latitude;
   var lng = position.coords.longitude;
-  d3.selectAll("#map").innerHTML=lat+"<br" +lng
-}
+};
+
 function showError(error) {
   switch(error.code) {
     case error.PERMISSION_DENIED:
