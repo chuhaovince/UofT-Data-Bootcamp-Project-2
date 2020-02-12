@@ -3,6 +3,10 @@ from flask import Flask, render_template, jsonify, request, redirect
 from flask_pymongo import PyMongo
 import requests
 from bson.json_util import dumps
+from selenium.webdriver.support.ui import Select
+from selenium import webdriver
+
+
 #################################################
 # Flask Setup
 #################################################
@@ -70,10 +74,8 @@ def add():
                 "LevelID" : levelID
             }]
         }
-
         # Insert the new location data into database collection called stations
         mongo.db.stations.insert(new_location)
-
         return redirect("/", code=302)
 
     return render_template("Add.html")
@@ -100,18 +102,21 @@ def search():
 def login():
     return render_template("login.html")
     
-@app.route("/api/filter")
-def filterlocation():
-        # Get the user selected level
-    connector_level = request.form.get("level_select")
-    connector_type = request.form.get("type_select")
-    # Filter the database with the selected level
-    data = mongo.db.stations.find({"$and" :[{"Connections.LevelID" : connector_level}, {"Connections.ConnectionType.Title" : connector_type}]})
+
+# @app.route("/api/filter")
+# def filterlocation():
+
+#     # Get the user selected level
+#     # connector_level = request.form("level_select")
+#     # connector_type = request.form("type_select")
+#     # Filter the database with the selected level
+#     # data = mongo.db.stations.find({"$and" :[{"Connections.LevelID" : connector_level}, {"Connections.ConnectionType.Title" : connector_type}]})
     
-    print(f'sssss: {connector_level}')
-    jsondata = dumps(data) # serialization/convert to json object
-    print(jsondata)
-    return jsondata
+#     print(f'sssss: {connector_level}')
+#     jsondata = dumps(data) # serialization/convert to json object
+#     print(type(jsondata))
+#     return jsondata
+
 
     
 if __name__ == "__main__":
