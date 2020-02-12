@@ -49,27 +49,31 @@ def home():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == "POST":
-        addressTitle = request.form["addresstitle"]
-        address = request.form["address"]
+        addressTitle = request.form["Title"]
+        address = request.form["Address"]
         town = request.form["town"]
         province = request.form["state"]
         lat = request.form["Lat"]
         lng = request.form["Lon"]
-        connectionTitle = request.form["connextiontitle"]
-        levelID = request.form["levelid"]
+        connectionTitle = request.form["Plug_type"]
+        levelID = request.form["Level"]
 
         new_location = {
             "AddressInfo" : {
                 "Title" : addressTitle,
                 "AddressLine1" : address,
                 "Town" : town,
-                "StateOrProvince" : province,
+                "StateOrProvince" : province
             },
             "Latitude" : lat,
             "longitude" : lng,
             "Connections" : [{
-                "Title" : connectionTitle,
-                "LevelID" : levelID
+                "ConnectionType" : {
+                    "Title" : connectionTitle
+                },
+                "Level" : {
+                    "Title" : levelID
+                }
             }]
         }
         # Insert the new location data into database collection called stations
