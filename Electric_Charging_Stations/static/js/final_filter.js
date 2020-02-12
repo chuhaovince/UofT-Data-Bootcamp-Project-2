@@ -1,7 +1,7 @@
 // Creating map object
 var myMap = L.map("map", {
   center: [43.6532, -79.3832],
-  zoom: 7
+  zoom: 8
 });
 
 // Adding tile layer to the map
@@ -14,7 +14,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 
 // Assemble API query URL
-var url = "https://api.openchargemap.io/v3/poi/?output=json&latitude=43.6532&longitude=-79.3832&distance=1000&distanceunit=KM&countrycode=CA&maxresults=1000&opendata=true&client=Ontario%20charging%20stations&key=f6e470b3-c2f2-4c69-a477-3dbac08fea4b";
+var url = "/api/allocations";
 //var url = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
 console.log(url)
 
@@ -35,7 +35,8 @@ d3.json(url,function(response) {
     && response[i].AddressInfo
     && response[i].Connections[0].Level
     && response[i].Connections[0].Level.Title
-    && response[i].Connections[0].Level.Title=="Level 1 : Low (Under 2kW)") {
+    // && response[i].Connections[0].Level.Title=="Level 1 : Low (Under 2kW)"
+    ) {
       // Add a new marker to the cluster group and bind a pop-up
       markers.addLayer(L.marker([location.Latitude, location.Longitude])
         .bindPopup("<h3>"+response[i].AddressInfo.Title+"</h3><hr><p>"+"ConnectionType: "+ response[i].Connections[0].ConnectionType.Title + "</p> <p> Power Level: " + response[i].Connections[0].Level.Title + "</p>"));
@@ -44,19 +45,41 @@ d3.json(url,function(response) {
       }
  
   }
-  myMap.addLayer(markers)});
+  myMap.addLayer(markers)
+});
 // Add our marker cluster layer to the map
 
-d3.selectAll("#selDataset").on("change", getData);
+// d3.selectAll("#selDataset").on("change", getData);
 
 // d3.selectAll("#searchNearby").on("submit", dosomething);
 
 // function dosomething () {}; 
 
-function getData () {
+function getData (current_location) {
+  //Check if map container is already initialized
+  var container = L.DomUtil.get('map'); 
+  if(container != null){ 
+    container._leaflet_id = null; 
+  };
+
+  var myMap = L.map("map", {
+    center: current_location,
+    zoom: 13.5
+  });
+
+  myMap.dragging.enable();
+
+  // Adding tile layer to the map
+  L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.streets",
+    accessToken: API_KEY
+  }).addTo(myMap);
+
   d3.json(url,function(response) {
   markers.clearLayers();
-  
+  myMap.removeLayer(Mymarker);
   var dropdownMenu = d3.select("#selDataset");
   // Assign the value of the dropdown menu option to a variable
   var dataset = dropdownMenu.property("value");
@@ -114,28 +137,17 @@ function showPosition(position) {
     current_location=[lat,lng]
     
     console.log(current_location);
-  buildMap(current_location)
+  getData(current_location);
+  buildMap(current_location);
   };
 
-
-
-// var greenIcon = L.icon({
-//     iconUrl: 'leaf-green.png',
-//     iconSize: [38, 95],
-//     iconAnchor: [22, 94],
-//     popupAnchor: [-3, -76],
-//     shadowUrl: 'leaf-shadow.png',
-//     shadowSize: [68, 95],
-//     shadowAnchor: [22, 94]
-// });
-
+var Mymarker = {};
 function buildMap(current_location) {
-
 // Create a new marker
 // Pass in some initial options, and then add it to the map using the addTo method
 var Mymarker = L.marker(current_location).addTo(myMap);
 // Binding a pop-up to our marker
-Mymarker.bindPopup("Hello You Are Here!");
+Mymarker.bindPopup("Current Position");
 };
 
 d3.select("#submit").on("click", handleSearchNearBy);

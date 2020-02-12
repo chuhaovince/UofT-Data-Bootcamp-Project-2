@@ -4,34 +4,56 @@ body {
 
 #map {
     height: 100%;
-  }
-  /* Optional: Makes the sample page fill the window. */
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+height: 100%;
+margin: 0;
+padding: 0;
+}
 
-  h5 {
-      font-size : 18px;
-      text-align: center;
-  }
+h5 {
+    font-size : 18px;
+    text-align: center;
+}
 
-  .well {
-      background-color: rgb(221, 231, 216);
-      margin-bottom: 150px;
-      
-  }
+.well {
+    background-color: rgb(221, 231, 216);
+    margin-bottom: 150px;
+    
+}
 
-  button {
-      background-color: blanchedalmond;
-      box-shadow: 3px 3px 5px grey;
-      font-size: 17px;
-      font-weight: bolder;
-      border-radius: 5px;
-  }
+button {
+    background-color: blanchedalmond;
+    box-shadow: 3px 3px 5px grey;
+    font-size: 17px;
+    font-weight: bolder;
+    border-radius: 5px;
+    margin-left: 1325px;
+    margin-bottom: 50px;
+    height : 45px;
+    width: 300px;
+}
 
-  .map-container {
-      height: 600px;
-  }
+.map-container {
+    height: 600px;
+}
 
+#selDataset {
+margin-left: 125px;
+margin-bottom: 50px;
+height : 45px;
+width : 300px;
+}
+
+.leaflet-popup-content-wrapper {
+padding: 6px;
+font-size: 12px;
+line-height: 1;
+line-height: 1.5em;
+color: #fff;
+text-align: center;
+text-transform: capitalize;
+background: rgba(0, 0, 0, 0.8);
+border-radius: 4px;
+}

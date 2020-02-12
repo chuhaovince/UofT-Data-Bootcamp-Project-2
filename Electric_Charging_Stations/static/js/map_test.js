@@ -37,12 +37,12 @@ d3.json(url,function(response) {
         // && response[i].Connections[0].Level.Title
         // && response[i].Connections[0].Level.Title=="Level 1 : Low (Under 2kW)") {
           // Add a new marker to the cluster group and bind a pop-up
-		markers.addLayer(L.marker([location.Latitude, location.Longitude])
-			.bindPopup("<h3>"+response[i].AddressInfo.Title+"</h3><hr><h2>"+response[i].AddressInfo.AddressLine1+"</h2><hr><p>"+"Connection Type: "+ connections.forEach(type=>type.ConnectionType.Title) + "</p><hr><p> Power Level: " + connections.forEach(lvl=>lvl.LevelID) + "</p>"));
-		console.log("Complete!")
+		markers.addLayer(L.marker([location.Latitude, location.Longitude]))
+			// .bindPopup("<h3>"+response[i].AddressInfo.Title+"</h3><hr><h2>"+response[i].AddressInfo.AddressLine1+"</h2><hr><p>"+"Connection Type: "+ connections.forEach(type=>type.ConnectionType.Title) + "</p><hr><p> Power Level: " + connections.forEach(lvl=>lvl.LevelID) + "</p>"));
+
         
         //   }
      
-      }
-	  myMap.addLayer(markers);
+    }
+	myMap.addLayer(markers);
 	});
