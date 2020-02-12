@@ -89,6 +89,7 @@ function CreateMap(lat, lng) {
 
 
   // Assemble API query URL
+
   var url = "/api/allocations";
   //var url = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
   //console.log(url)
@@ -100,24 +101,26 @@ function CreateMap(lat, lng) {
   // Grab the data with d3
   d3.json(url,function(response) {  
 
-
       markers.clearLayers(); // clear previous markers
 
       var markers = L.markerClusterGroup({maxClusterRadius: 30});
 
       for (var i = 0; i < response.length; i++) {
+
         var connections = response[i].Connections;
         var typename = [];
         connections.forEach(type=>typename.push(type.ConnectionType.Title));
         var levels = [];
         connections.forEach(level=>levels.push(level.LevelID))
 
+
         // Set the data location property to a variable
         var location = response[i].AddressInfo;
 
         // Check for location property
-        
+
         if ((levelid in levels) && (type in typename)) {
+
           // Add a new marker to the cluster group and bind a pop-up
         markers.addLayer(L.marker([location.Latitude, location.Longitude])
           .bindPopup("<h3>"+response[i].AddressInfo.Title+"</h3><hr><h2>"+response[i].AddressInfo.AddressLine1+"</h2><hr><p>"+"Connection Type: "+ d3.selectAll("#selTyles").value + "</p><hr><p> Power Level: " + d3.selectAll("#selLevels").value + "</p>"));
@@ -126,9 +129,9 @@ function CreateMap(lat, lng) {
           };
         };
   
-    
     myMap.addLayer(markers);
   });
+
   // Add our marker cluster layer to the map
 };
  
@@ -187,6 +190,7 @@ d3.json(url,function(response) {
     // && response[i].Connections[0].Level.Title
     // && response[i].Connections[0].Level.Title==dataset) {
       // Add a new marker to the cluster group and bind a pop-up
+
     // L.marker([location.Latitude, location.Longitude]).addTo(myMap);
     markers.addLayer(L.marker([location.Latitude, location.Longitude])
       .bindPopup("<h3>"+response[i].AddressInfo.Title+"</h3><hr><h2>"+response[i].AddressInfo.AddressLine1+"</h2><hr><p>"+"Connection Type: "+ connections.forEach(type=>type.ConnectionType.Title) + "</p><hr><p> Power Level: " + connections.forEach(lvl=>lvl.LevelID) + "</p>"));

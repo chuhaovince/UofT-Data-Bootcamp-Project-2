@@ -5,6 +5,8 @@ import requests
 from bson.json_util import dumps
 from selenium.webdriver.support.ui import Select
 from selenium import webdriver
+
+
 #################################################
 # Flask Setup
 #################################################
@@ -100,6 +102,7 @@ def search():
 def login():
     return render_template("login.html")
     
+
 # @app.route("/api/filter")
 # def filterlocation():
 
@@ -113,6 +116,7 @@ def login():
 #     jsondata = dumps(data) # serialization/convert to json object
 #     print(type(jsondata))
 #     return jsondata
+
 
     
 if __name__ == "__main__":
