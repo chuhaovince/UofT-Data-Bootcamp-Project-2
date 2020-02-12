@@ -73,7 +73,7 @@ def add():
             }]
         }
         # Insert the new location data into database collection called stations
-        mongo.db.stations.insert(new_location)
+        mongo.db.OpenData.insert(new_location)
         return redirect("/", code=302)
 
     return render_template("Add.html")
@@ -82,14 +82,14 @@ def add():
 @app.route("/api/allocations")
 def locations():
     # Fetch all data from database and jsonify it
-    data = mongo.db.stations.find()
+    data = mongo.db.OpenData.find()
     data = dumps(data)
     #print(data)
     return data
 
 @app.route("/api/types")
 def types():
-    data = mongo.db.stations.distinct("Connections.ConnectionType.Title")
+    data = mongo.db.Opendata.distinct("Connections.ConnectionType.Title")
     return dumps(data)
 
 @app.route("/search")
