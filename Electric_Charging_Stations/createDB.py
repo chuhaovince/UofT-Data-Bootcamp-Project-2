@@ -1,7 +1,7 @@
 import pymongo
 import requests
-from config import opendatapi
 import sys
+from config import opendatapi
 
 # Distributed under the MIT license - http://opensource.org/licenses/MIT
 

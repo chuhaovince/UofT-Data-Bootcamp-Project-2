@@ -3,8 +3,6 @@ from flask import Flask, render_template, jsonify, request, redirect
 from flask_pymongo import PyMongo
 import requests
 from bson.json_util import dumps
-from selenium.webdriver.support.ui import Select
-from selenium import webdriver
 
 
 #################################################
@@ -20,10 +18,10 @@ app.app_context().push()
 #################################################
 
 # Distributed under the MIT license - http://opensource.org/licenses/MIT
-# __author__ = 'mLab'
+ #__author__ = 'mLab'
 
 # Use flask_pymongo to set up mongo connection
-app.config["MONGO_URI"] = "mongodb://localhost:27017/charging_station"
+app.config["MONGO_URI"] = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
 mongo = PyMongo(app)
 
 # Store the API url
@@ -75,28 +73,29 @@ def add():
             }]
         }
         # Insert the new location data into database collection called stations
-        mongo.db.stations.insert(new_location)
+        mongo.db.OpenData.insert(new_location)
         return redirect("/", code=302)
 
-    return render_template("Add.html")
+    return render_template("add.html")
 
 
 @app.route("/api/allocations")
 def locations():
     # Fetch all data from database and jsonify it
-    data = mongo.db.stations.find()
+    data = mongo.db.OpenData.find()
     data = dumps(data)
     #print(data)
     return data
 
-@app.route("/api/types")
-def types():
-    data = mongo.db.stations.distinct("Connections.ConnectionType.Title")
-    return dumps(data)
+# @app.route("/api/types")
+# def types():
+#     data = mongo.db.OpenData.distinct("Connections.ConnectionType.Title")
+#     print(dumps(data))
+#     return dumps(data)
 
 @app.route("/search")
 def search():
-    return render_template("search.html")
+    return render_template("search_new.html")
 
 @app.route("/login")
 def login():
