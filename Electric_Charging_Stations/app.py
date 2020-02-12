@@ -3,8 +3,6 @@ from flask import Flask, render_template, jsonify, request, redirect
 from flask_pymongo import PyMongo
 import requests
 from bson.json_util import dumps
-from selenium.webdriver.support.ui import Select
-from selenium import webdriver
 
 
 #################################################
@@ -20,10 +18,10 @@ app.app_context().push()
 #################################################
 
 # Distributed under the MIT license - http://opensource.org/licenses/MIT
-# __author__ = 'mLab'
+ #__author__ = 'mLab'
 
 # Use flask_pymongo to set up mongo connection
-app.config["MONGO_URI"] = "mongodb://localhost:27017/charging_station"
+app.config["MONGO_URI"] = "mongodb://heroku_kmpx4htl:388nghofnub05u3dgf17qgf8lb@ds045588.mlab.com:45588/heroku_kmpx4htl?retryWrites=false"
 mongo = PyMongo(app)
 
 # Store the API url
