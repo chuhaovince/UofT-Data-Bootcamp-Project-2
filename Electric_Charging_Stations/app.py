@@ -56,6 +56,7 @@ def add():
         lat = request.form["Lat"]
         lng = request.form["Lon"]
         connectionTitle = request.form["Plug_type"]
+        ID = request.form["ID"]
         levelID = request.form["Level"]
 
         new_location = {
@@ -71,6 +72,7 @@ def add():
                 "ConnectionType" : {
                     "Title" : connectionTitle
                 },
+                "LevelID" : ID;
                 "Level" : {
                     "Title" : levelID
                 }
