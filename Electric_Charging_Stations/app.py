@@ -80,7 +80,7 @@ def add():
         mongo.db.OpenData.insert(new_location)
         return redirect("/", code=302)
 
-    return render_template("add.html")
+    return render_template("Add.html")
 
 
 @app.route("/api/allocations")
