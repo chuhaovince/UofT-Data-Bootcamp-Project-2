@@ -72,7 +72,7 @@ def add():
                 "ConnectionType" : {
                     "Title" : connectionTitle
                 },
-                "LevelID" : ID;
+                "LevelID" : ID,
                 "Level" : {
                     "Title" : levelID
                 }
