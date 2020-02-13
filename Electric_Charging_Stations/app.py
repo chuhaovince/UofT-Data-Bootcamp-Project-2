@@ -66,7 +66,7 @@ def add():
                 "StateOrProvince" : province,
                 "Latitude" : lat,
                 "longitude" : lng
-            }
+            },
             "Connections" : [{
                 "ConnectionType" : {
                     "Title" : connectionTitle
