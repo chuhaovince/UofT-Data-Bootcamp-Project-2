@@ -63,10 +63,10 @@ def add():
                 "Title" : addressTitle,
                 "AddressLine1" : address,
                 "Town" : town,
-                "StateOrProvince" : province
-            },
-            "Latitude" : lat,
-            "longitude" : lng,
+                "StateOrProvince" : province,
+                "Latitude" : lat,
+                "longitude" : lng
+            }
             "Connections" : [{
                 "ConnectionType" : {
                     "Title" : connectionTitle
