@@ -65,7 +65,7 @@ def add():
                 "Town" : town,
                 "StateOrProvince" : province,
                 "Latitude" : lat,
-                "longitude" : lng
+                "Longitude" : lng
             },
             "Connections" : [{
                 "ConnectionType" : {
